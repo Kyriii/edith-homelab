@@ -14,6 +14,7 @@ I built this to get hands-on with the Linux, networking, security and AWS skills
 | **Always-on** | Masked all sleep/suspend targets so it runs lid-closed 24/7. Automatic daily security updates (`unattended-upgrades`). |
 | **Remote access** | Managed headless from my PC over **SSH with keys only**. Password and root logins disabled. VS Code Remote-SSH for editing code on the server. |
 | **Firewall** | `ufw`, **deny-by-default inbound**. Only SSH, DNS and the AdGuard dashboard are allowed, and only from the home subnet. Nothing is port-forwarded from the internet. |
+| **Remote access (anywhere)** | **Tailscale** mesh VPN: reach the server from my phone over 4G/5G with SSH (Termius, key-based) and the AdGuard dashboard. Nothing exposed to the internet; key expiry disabled for the server; ufw allows only the `tailscale0` interface. |
 | **Network** | Rebuilt the home network: ISP hub in **modem mode**, mesh Wi-Fi as the router (removed double NAT), fixed DHCP reservation for the server. |
 | **DNS / ad-blocking** | **AdGuard Home** as the DNS server for the whole house via DHCP, with encrypted upstreams (DNS-over-HTTPS) in parallel and optimistic caching. ~17% of lookups blocked. |
 | **Automation** | Cron runs my Python content agents: daily draft → Telegram approval → scheduled publish to Instagram (images handed off via S3 pre-signed URLs). |
@@ -83,7 +84,6 @@ See [`backup.sh`](backup.sh) and [`iam-backup-policy.json`](iam-backup-policy.js
 
 - CloudWatch logs + alarm (via SNS email) if a scheduled post fails
 - Wired Ethernet for the server (it's DNS for the whole house now)
-- Tailscale for secure remote access and ad-blocking away from home
 - Docker, Uptime Kuma monitoring, Grafana/Prometheus dashboards
 - GitHub Actions to auto-deploy agent code to the server
 
